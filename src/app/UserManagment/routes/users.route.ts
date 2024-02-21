@@ -5,7 +5,6 @@ import { validateReqSchema } from '.';
 
 export const register = (router: Router) => {
   const reqSchema = [body('id').exists().isString(), body('username').exists().isString(), body('duration').exists().isString()];
-
-  const coursePutController = container.get('App.UserManagment.controllers.UserPutController');
+  const coursePutController = container.get('Apps.UserManagment.controllers.UserPutController');
   router.put('/users/:id', reqSchema, validateReqSchema, (req: Request, res: Response) => coursePutController.run(req, res));
 };

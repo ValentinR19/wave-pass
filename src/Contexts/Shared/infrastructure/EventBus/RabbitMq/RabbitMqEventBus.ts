@@ -60,7 +60,7 @@ export class RabbitMQEventBus implements EventBus {
     return {
       messageId: event.eventId,
       contentType: 'application/json',
-      contentEncoding: 'utf-8'
+      contentEncoding: 'utf-8',
     };
   }
 

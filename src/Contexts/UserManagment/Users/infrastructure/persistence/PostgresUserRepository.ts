@@ -14,13 +14,12 @@ export class PostgresUserRepository extends TypeOrmRepository<User> implements U
     await this.persist(user);
   }
 
-  async searchAll(page: number, result: number): Promise<IPaginated<User>> {
-    const repository = this.repository();
-
-    const Users = (await repository).createQueryBuilder('user').where('user.DeletedAt IS NULL');
+  async searchAll(page: number, result: number) {
+    // const repository = this.repository();
+    // const Users = (await repository).createQueryBuilder('user').where('user.DeletedAt IS NULL');
   }
 
-  matching(criteria: any): Promise<IPaginated<User>> {
+  matching(criteria: any) {
     throw new Error('Method not implemented.');
   }
 }

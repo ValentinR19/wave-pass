@@ -1,4 +1,4 @@
-import { UserManagmentApp } from "./UserManagmentApp";
+import { UserManagmentApp } from './UserManagmentApp';
 
 try {
   new UserManagmentApp().start();
@@ -7,7 +7,7 @@ try {
   process.exit(1);
 }
 
-process.on("uncaughtException", (err) => {
-  console.log("uncaughtException", err);
+process.on('uncaughtException', (err) => {
+  console.log('uncaughtException', err);
   process.exit(1);
 });

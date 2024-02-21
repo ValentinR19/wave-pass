@@ -1,8 +1,4 @@
 services:
-  # Apps.UserManagment.controllers.StatusGetController:
-  #   class: ../../controllers/StatusGetController
-  #   arguments: []
-
   Apps.UserManagment.controllers.UserPutController:
     class: ../../controllers/UserPutController
     arguments: ['@UserManagment.Shared.domain.CommandBus']

@@ -39,7 +39,7 @@ export class ElasticClientFactory {
     if (!exist) {
       await client.indices.create({
         index: config.indexName,
-        body: config.indexConfig
+        body: config.indexConfig,
       });
     }
   }

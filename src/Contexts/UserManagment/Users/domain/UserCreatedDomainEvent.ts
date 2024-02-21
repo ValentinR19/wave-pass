@@ -1,4 +1,4 @@
-import { DomainEvent } from "../../../Shared/domain/DomainEvent";
+import { DomainEvent } from '../../../Shared/domain/DomainEvent';
 
 type CreateUserDomainEventAttributes = {
   readonly username: string;
@@ -7,7 +7,7 @@ type CreateUserDomainEventAttributes = {
 };
 
 export class UserCreatedDomainEvent extends DomainEvent {
-  static readonly EVENT_NAME = "user.created";
+  static readonly EVENT_NAME = 'user.created';
 
   readonly username: string;
   readonly firstName: string;

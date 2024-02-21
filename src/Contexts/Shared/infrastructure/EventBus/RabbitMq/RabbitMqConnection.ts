@@ -20,14 +20,7 @@ export class RabbitMqConnection {
     return await this.channel?.assertExchange(params.name, 'topic', { durable: true });
   }
 
-  async queue(params: {
-    exchange: string;
-    name: string;
-    routingKeys: string[];
-    deadLetterExchange?: string;
-    deadLetterQueue?: string;
-    messageTtl?: Number;
-  }) {
+  async queue(params: { exchange: string; name: string; routingKeys: string[]; deadLetterExchange?: string; deadLetterQueue?: string; messageTtl?: Number }) {
     const durable = true;
     const exclusive = false;
     const autoDelete = false;
@@ -37,21 +30,14 @@ export class RabbitMqConnection {
       exclusive,
       durable,
       autoDelete,
-      arguments: args
+      arguments: args,
     });
     for (const routingKey of params.routingKeys) {
       await this.channel!.bindQueue(params.name, params.exchange, routingKey);
     }
   }
 
-  private getQueueArguments(params: {
-    exchange: string;
-    name: string;
-    routingKeys: string[];
-    deadLetterExchange?: string;
-    deadLetterQueue?: string;
-    messageTtl?: Number;
-  }) {
+  private getQueueArguments(params: { exchange: string; name: string; routingKeys: string[]; deadLetterExchange?: string; deadLetterQueue?: string; messageTtl?: Number }) {
     let args: any = {};
     if (params.deadLetterExchange) {
       args = { ...args, 'x-dead-letter-exchange': params.deadLetterExchange };
@@ -81,7 +67,7 @@ export class RabbitMqConnection {
       port,
       username,
       password,
-      vhost
+      vhost,
     });
 
     connection.on('error', (err: any) => {
@@ -107,9 +93,7 @@ export class RabbitMqConnection {
     const { routingKey, content, options, exchange } = params;
 
     return new Promise((resolve: Function, reject: Function) => {
-      this.channel!.publish(exchange, routingKey, content, options, (error: any) =>
-        error ? reject(error) : resolve()
-      );
+      this.channel!.publish(exchange, routingKey, content, options, (error: any) => (error ? reject(error) : resolve()));
     });
   }
 
@@ -152,7 +136,7 @@ export class RabbitMqConnection {
       headers: this.incrementRedeliveryCount(message),
       contentType,
       contentEncoding,
-      priority
+      priority,
     };
     return options;
   }

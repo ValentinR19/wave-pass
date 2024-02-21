@@ -14,20 +14,20 @@ export const UserEntity = new EntitySchema<User>({
     id: {
       type: String,
       primary: true,
-      transformer: ValueObjectTransformer(UserId)
+      transformer: ValueObjectTransformer(UserId),
     },
     username: {
       type: String,
-      transformer: ValueObjectTransformer(UserUsername)
+      transformer: ValueObjectTransformer(UserUsername),
     },
 
     firstName: {
       type: String,
-      transformer: ValueObjectTransformer(UserFirstName)
+      transformer: ValueObjectTransformer(UserFirstName),
     },
     lastName: {
       type: String,
-      transformer: ValueObjectTransformer(UserLastName)
-    }
-  }
+      transformer: ValueObjectTransformer(UserLastName),
+    },
+  },
 });

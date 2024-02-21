@@ -8,7 +8,7 @@ export class RabbitMQConfigurer {
   constructor(
     private connection: RabbitMqConnection,
     private queueNameFormatter: RabbitMQqueueFormatter,
-    private messageRetryTtl: number
+    private messageRetryTtl: number,
   ) {}
 
   async configure(params: { exchange: string; subscribers: Array<DomainEventSubscriber<DomainEvent>> }): Promise<void> {
@@ -41,13 +41,13 @@ export class RabbitMQConfigurer {
       exchange: retryExchange,
       messageTtl: this.messageRetryTtl,
       deadLetterExchange: exchange,
-      deadLetterQueue: queue
+      deadLetterQueue: queue,
     });
     await this.connection.queue({ routingKeys: [queue], name: deadLetterQueue, exchange: deadLetterExchange });
   }
 
   private getRoutingKeysFor(subscriber: DomainEventSubscriber<DomainEvent>) {
-    const routingKeys = subscriber.subscribedTo().map(event => event.EVENT_NAME);
+    const routingKeys = subscriber.subscribedTo().map((event) => event.EVENT_NAME);
 
     const queue = this.queueNameFormatter.format(subscriber);
     routingKeys.push(queue);

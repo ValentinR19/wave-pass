@@ -20,7 +20,10 @@ type SearchHit<T> = { _source: T };
 export abstract class ElasticRepository<T extends AggregateRoot> {
   private criteriaConverter: ElasticCriteriaConverter;
 
-  constructor(private _client: Promise<ElasticClient>, private config: ElasticConfig) {
+  constructor(
+    private _client: Promise<ElasticClient>,
+    private config: ElasticConfig,
+  ) {
     this.criteriaConverter = new ElasticCriteriaConverter();
   }
 
@@ -44,10 +47,10 @@ export abstract class ElasticRepository<T extends AggregateRoot> {
     try {
       const response = await client.search<SearchResult<D>>({
         index: this.indexName(),
-        body: body.build()
+        body: body.build(),
       });
 
-      return response.body.hits.hits.map(hit => unserializer({ ...hit._source }));
+      return response.body.hits.hits.map((hit) => unserializer({ ...hit._source }));
     } catch (e) {
       if (this.isNotFoundError(e)) {
         return [];

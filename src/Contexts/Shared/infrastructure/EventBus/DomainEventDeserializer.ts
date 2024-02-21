@@ -12,7 +12,7 @@ type DomainEventJSON = {
 export class DomainEventDeserializer extends Map<string, DomainEventClass> {
   static configure(subscribers: DomainEventSubscribers) {
     const mapping = new DomainEventDeserializer();
-    subscribers.items.forEach(subscriber => {
+    subscribers.items.forEach((subscriber) => {
       subscriber.subscribedTo().forEach(mapping.registerEvent.bind(mapping));
     });
 
@@ -37,7 +37,7 @@ export class DomainEventDeserializer extends Map<string, DomainEventClass> {
       aggregateId,
       attributes,
       occurredOn: new Date(occurred_on),
-      eventId: id
+      eventId: id,
     });
   }
 }

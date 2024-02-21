@@ -1,13 +1,14 @@
 services:
   UserManagment.Users.domain.UserRepositoy:
-    class: ../../../../../Contexts/UserManagment/Users/infrastructure/persistence/PostgresUserRepository
+    class: ../../../../Contexts/UserManagment/Users/infrastructure/persistence/PostgresUserRepository
     arguments: ['@UserManagment.Users.ConnectionManager']
 
-    UserManagment.Users.domain.UserCreator:
-      class: ../../../../../Contexts/UserManagment/Users/infrastructure/persistence/PostgresUserRepository
-      arguments: ['@UserManagment.Users.domain.UserRepository', '@UserManagment.Shared.domain.EventBus']
+  UserManagment.Users.domain.UserCreator:
+    class: ../../../../Contexts/UserManagment/Users/application/Create/UserCreator
+    arguments: ['@UserManagment.Users.domain.UserRepository', '@UserManagment.Shared.domain.EventBus']
+
   UserManagment.users.CreateUserCommandHandler:
-    class: ../../../../../Contexts/UserManagment/Users/application/Create/CreateUserCommandHandler
+    class: ../../../../Contexts/UserManagment/Users/application/Create/CreateUserCommandHandler
     arguments: ['@UserManagment.Users.application.UserCreator']
     tags:
       - { name: 'commandHandler' }

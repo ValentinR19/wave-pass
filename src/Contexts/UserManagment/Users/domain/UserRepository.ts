@@ -4,7 +4,7 @@ import { User } from './User';
 export interface UserRepository {
   save(user: User): Promise<void>;
 
-  searchAll(page: number, result: number): Promise<IPaginated<User>>;
+  searchAll(page: number, result: number);
 
-  matching(criteria: any): Promise<IPaginated<User>>;
+  matching(criteria: any);
 }

@@ -8,7 +8,7 @@ export enum TypeQueryEnum {
   TERMS = 'terms',
   MATCH_ALL = 'match_all',
   RANGE = 'range',
-  WILDCARD = 'wildcard'
+  WILDCARD = 'wildcard',
 }
 
 type QueryObject = { type: TypeQueryEnum; field: string; value: string | object };
@@ -27,7 +27,7 @@ export class ElasticCriteriaConverter {
       [Operator.GT, this.greaterThanQuery],
       [Operator.LT, this.lowerThanQuery],
       [Operator.CONTAINS, this.wildcardQuery],
-      [Operator.NOT_CONTAINS, this.wildcardQuery]
+      [Operator.NOT_CONTAINS, this.wildcardQuery],
     ]);
   }
 
@@ -49,7 +49,7 @@ export class ElasticCriteriaConverter {
   }
 
   protected generateQuery(body: Bodybuilder, filters: Filters): Bodybuilder {
-    filters.filters.map(filter => {
+    filters.filters.map((filter) => {
       const { type, value, field } = this.queryForFilter(filter);
 
       if (filter.operator.isPositive()) {

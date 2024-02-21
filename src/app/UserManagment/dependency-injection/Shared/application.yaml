@@ -1,19 +1,31 @@
-  UserManagment.Shared.DomainEventFailoverPublisher:
-    class: ../../../../../Contexts/Shared/infrastructure/EventBus/DomainEventFailoverPublisher/DomainEventFailoverPublisher
-    arguments: ['@UserManagment.Shared.ConnectionManager']
+services:
+  # UserManagment.Shared.DomainEventFailoverPublisher:
+  #   class: ../../../../Contexts/Shared/infrastructure/EventBus/DomainEventFailoverPublisher/DomainEventFailoverPublisher
+  #   arguments: ['@UserManagment.Shared.ConnectionManager']
 
   UserManagment.Shared.CommandHandlers:
-    class: ../../../../../Contexts/Shared/infrastructure/CommandBus/CommandHandlers
-    arguments: ['!tagged commandHandler']
+    class: ../../../../Contexts/Shared/infrastructure/CommandBus/CommandHandlers
 
   UserManagment.Shared.domain.CommandBus:
-    class: ../../../../../Contexts/Shared/infrastructure/CommandBus/InMemoryCommandBus
+    class: ../../../../Contexts/Shared/infrastructure/CommandBus/InMemoryCommandBus
     arguments: ['@UserManagment.Shared.CommandHandlers']
 
   UserManagment.Shared.QueryHandlers:
-    class: ../../../../../Contexts/Shared/infrastructure/QueryBus/QueryHandlers
+    class: ../../../../Contexts/Shared/infrastructure/QueryBus/QueryHandlers
     arguments: ['!tagged queryHandler']
 
   UserManagment.Shared.domain.QueryBus:
-    class: ../../../../../Contexts/Shared/infrastructure/QueryBus/InMemoryQueryBus
+    class: ../../../../Contexts/Shared/infrastructure/QueryBus/InMemoryQueryBus
     arguments: ['@UserManagment.Shared.QueryHandlers']
+
+  # UserManagment.Shared.domain.EventBus:
+  #   factory:
+  #     class: ../../../../../Contexts/UserManagment/Shared/infrastructure/RabbitMQ/RabbitMQEventBusFactory
+  #     method: 'create'
+  #   arguments:
+  #     [
+  #       '@Mooc.Shared.DomainEventFailoverPublisher',
+  #       '@Mooc.Shared.RabbitMQConnection',
+  #       '@Mooc.Shared.RabbitMQqueueFormatter',
+  #       '@Mooc.Shared.RabbitMQConfig'
+  #     ]

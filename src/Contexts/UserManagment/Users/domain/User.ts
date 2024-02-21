@@ -1,8 +1,8 @@
-import { AggregateRoot } from "../../../Shared/domain/AgregateRoot";
-import { UserFirstName } from "./UserFirstName";
-import { UserId } from "./UserId";
-import { UserLastName } from "./UserLastName";
-import { UserUsername } from "./UserUsername";
+import { AggregateRoot } from '../../../Shared/domain/AgregateRoot';
+import { UserFirstName } from './UserFirstName';
+import { UserId } from './UserId';
+import { UserLastName } from './UserLastName';
+import { UserUsername } from './UserUsername';
 
 export class User extends AggregateRoot {
   id: UserId;

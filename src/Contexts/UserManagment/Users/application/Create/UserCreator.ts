@@ -7,7 +7,10 @@ import { UserLastName } from '../../domain/UserLastName';
 import { UserUsername } from '../../domain/UserUsername';
 
 export class UserCreator {
-  constructor(private readonly userRepository: UserRepository, private readonly eventBus: EventBus) {}
+  constructor(
+    private readonly userRepository: UserRepository,
+    private readonly eventBus: EventBus,
+  ) {}
 
   async run(params: { id: UserId; username: UserUsername; firstName: UserFirstName; lastName: UserLastName }): Promise<void> {
     const user = User.create(params.id, params.username, params.firstName, params.lastName);
