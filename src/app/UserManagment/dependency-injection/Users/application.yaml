@@ -1,11 +1,11 @@
 services:
   UserManagment.Users.domain.UserRepositoy:
     class: ../../../../Contexts/UserManagment/Users/infrastructure/persistence/PostgresUserRepository
-    arguments: ['@UserManagment.Users.ConnectionManager']
+    arguments: ['@UserManagment.Shared.ConnectionManager']
 
-  UserManagment.Users.domain.UserCreator:
+  UserManagment.Users.application.UserCreator:
     class: ../../../../Contexts/UserManagment/Users/application/Create/UserCreator
-    arguments: ['@UserManagment.Users.domain.UserRepository', '@UserManagment.Shared.domain.EventBus']
+    arguments: ['@UserManagment.Users.domain.UserRepository']
 
   UserManagment.users.CreateUserCommandHandler:
     class: ../../../../Contexts/UserManagment/Users/application/Create/CreateUserCommandHandler

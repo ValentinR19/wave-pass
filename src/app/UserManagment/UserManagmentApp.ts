@@ -1,6 +1,3 @@
-import { EventBus } from '../../Contexts/Shared/domain/EventBus';
-import { DomainEventSubscribers } from '../../Contexts/Shared/infrastructure/EventBus/DomainEventSubscribers';
-import container from './dependency-injection';
 import { Server } from './server';
 // import { RabbitMqConnection } from "../../../Contexts/Shared/infrastructure/EventBus/RabbitMQ/RabbitMqConnection";
 

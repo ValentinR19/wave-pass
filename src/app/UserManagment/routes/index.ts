@@ -14,6 +14,8 @@ function register(routePath: string, router: Router) {
 }
 
 export function validateReqSchema(req: Request, res: Response, next: Function) {
+  
+
   const validationErrors = validationResult(req);
   if (validationErrors.isEmpty()) {
     return next();

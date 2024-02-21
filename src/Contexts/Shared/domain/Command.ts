@@ -1,1 +1,3 @@
-export abstract class Command {}
+export abstract class Command {
+  constructor() {}
+}

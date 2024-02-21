@@ -1,5 +1,4 @@
 import { EntitySchema } from 'typeorm';
-import { IPaginated } from '../../../../Shared/domain/IPaginated';
 import { TypeOrmRepository } from '../../../../Shared/infrastructure/persistence/typeorm/TypeOrmRepository';
 import { UserRepository } from '../../domain/UserRepository';
 import { User } from '../../domain/User';
