@@ -1,0 +1,12 @@
+services:
+  # Apps.UserManagment.controllers.StatusGetController:
+  #   class: ../../controllers/StatusGetController
+  #   arguments: []
+
+  Apps.UserManagment.controllers.UserPutController:
+    class: ../../controllers/UserPutController
+    arguments: ['@UserManagment.Shared.domain.CommandBus']
+
+  # Apps.mooc.controllers.CoursesCounterGetController:
+  #   class: ../../controllers/CoursesCounterGetController
+  #   arguments: ['@Mooc.Shared.domain.QueryBus']

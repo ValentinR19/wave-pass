@@ -1,0 +1,26 @@
+import { EntitySchema } from 'typeorm';
+import { IPaginated } from '../../../../Shared/domain/IPaginated';
+import { TypeOrmRepository } from '../../../../Shared/infrastructure/persistence/typeorm/TypeOrmRepository';
+import { UserRepository } from '../../domain/UserRepository';
+import { User } from '../../domain/User';
+import { UserEntity } from './typeorm/UserEntity';
+
+export class PostgresUserRepository extends TypeOrmRepository<User> implements UserRepository {
+  protected entitySchema(): EntitySchema<User> {
+    return UserEntity;
+  }
+
+  async save(user: User): Promise<void> {
+    await this.persist(user);
+  }
+
+  async searchAll(page: number, result: number): Promise<IPaginated<User>> {
+    const repository = this.repository();
+
+    const Users = (await repository).createQueryBuilder('user').where('user.DeletedAt IS NULL');
+  }
+
+  matching(criteria: any): Promise<IPaginated<User>> {
+    throw new Error('Method not implemented.');
+  }
+}
