@@ -11,12 +11,10 @@ export class CreateUserCommandHandler implements CommandHandler<CreateUserComman
   constructor(private userCreator: UserCreator) {}
 
   subscribedTo(): Command {
-    console.log('Entra aca')
     return CreateUserCommand;
   }
 
   async handle(command: CreateUserCommand): Promise<void> {
-    console.log('Command', command)
     const id = new UserId(command.id);
     const username = new UserUsername(command.username);
     const firstName = new UserFirstName(command.firstName);

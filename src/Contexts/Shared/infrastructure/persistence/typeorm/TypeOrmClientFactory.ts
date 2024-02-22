@@ -6,14 +6,14 @@ export class TypeOrmClientFactory {
     try {
       const connection = await createConnection({
         name: contextName,
-        type: 'postgres',
+        type: 'mysql',
         host: config.host,
         port: config.port,
         username: config.username,
         password: config.password,
         database: config.database,
         entities: [__dirname + '/../../../../**/**/infrastructure/persistence/typeorm/*{.js,.ts}'],
-        synchronize: true,
+        synchronize: false,
         logging: true,
       });
 

@@ -10,6 +10,7 @@ export const UserEntity = new EntitySchema<User>({
   name: 'User',
   tableName: 'users',
   target: User,
+
   columns: {
     id: {
       type: String,
@@ -22,10 +23,12 @@ export const UserEntity = new EntitySchema<User>({
     },
 
     firstName: {
+      name: 'first_name',
       type: String,
       transformer: ValueObjectTransformer(UserFirstName),
     },
     lastName: {
+      name: 'last_name',
       type: String,
       transformer: ValueObjectTransformer(UserLastName),
     },

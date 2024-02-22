@@ -1,5 +1,5 @@
 services:
-  UserManagment.Users.domain.UserRepositoy:
+  UserManagment.Users.domain.UserRepository:
     class: ../../../../Contexts/UserManagment/Users/infrastructure/persistence/PostgresUserRepository
     arguments: ['@UserManagment.Shared.ConnectionManager']
 

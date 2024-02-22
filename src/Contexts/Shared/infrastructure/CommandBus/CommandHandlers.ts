@@ -3,25 +3,19 @@ import { CommandHandler } from '../../domain/CommandHandler';
 import { CommandNotRegisteredError } from '../../domain/CommandNotRegisteredError';
 
 export class CommandHandlers extends Map<Command, CommandHandler<Command>> {
-  constructor(commandHandlers: Array<CommandHandler<Command>> = []) {
-    console.log('Entra aca')
+  constructor(commandHandlers: Array<CommandHandler<Command>>) {
     super();
 
     commandHandlers.forEach((commandHandler) => {
-      console.log('Entra aca')
       this.set(commandHandler.subscribedTo(), commandHandler);
     });
   }
 
-
-
-  public get<T extends Command>(command: T): CommandHandler<T> {
-    const commandHandler = command.constructor.name as Command;
-    
+  public get(command: Command): CommandHandler<Command> {
+    const commandHandler = super.get(command.constructor);
     if (!commandHandler) {
       throw new CommandNotRegisteredError(command);
     }
-
-    return commandHandler as CommandHandler<T>;
+    return commandHandler;
   }
 }

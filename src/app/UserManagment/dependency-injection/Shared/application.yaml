@@ -2,11 +2,20 @@ services:
   # UserManagment.Shared.DomainEventFailoverPublisher:
   #   class: ../../../../Contexts/Shared/infrastructure/EventBus/DomainEventFailoverPublisher/DomainEventFailoverPublisher
   #   arguments: ['@UserManagment.Shared.ConnectionManager']
+  UserManagment.Shared.PostgreConfig:
+    factory:
+      class: ../../../../Contexts/UserManagment/Shared/infrastructure/persistence/postgre/TypeOrmConfigFactory
+      method: 'createConfig'
+
+  UserManagment.Shared.ConnectionManager:
+    factory:
+      class: ../../../../Contexts/Shared/infrastructure/persistence/typeorm/TypeOrmClientFactory
+      method: 'createClient'
+    arguments: ['UserManagment', '@UserManagment.Shared.PostgreConfig']
 
   UserManagment.Shared.CommandHandlers:
     class: ../../../../Contexts/Shared/infrastructure/CommandBus/CommandHandlers
     arguments: ['!tagged commandHandler']
-
 
   UserManagment.Shared.domain.CommandBus:
     class: ../../../../Contexts/Shared/infrastructure/CommandBus/InMemoryCommandBus
@@ -19,8 +28,6 @@ services:
   UserManagment.Shared.domain.QueryBus:
     class: ../../../../Contexts/Shared/infrastructure/QueryBus/InMemoryQueryBus
     arguments: ['@UserManagment.Shared.QueryHandlers']
-
-    
 
   # UserManagment.Shared.domain.EventBus:
   #   factory:
