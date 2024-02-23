@@ -5,10 +5,20 @@ services:
 
   UserManagment.Users.application.UserCreator:
     class: ../../../../Contexts/UserManagment/Users/application/Create/UserCreator
-    arguments: ['@UserManagment.Users.domain.UserRepository']
+    arguments: ['@UserManagment.Users.domain.UserRepository', '@UserManagment.Shared.domain.EventBus']
 
   UserManagment.users.CreateUserCommandHandler:
     class: ../../../../Contexts/UserManagment/Users/application/Create/CreateUserCommandHandler
     arguments: ['@UserManagment.Users.application.UserCreator']
     tags:
       - { name: 'commandHandler' }
+
+  UserManagment.users.CreateUser:
+    class: ../../../../Contexts/UserManagment/Users/application/Create/CreatorUserDomainEvent
+    arguments: ['@UserManagment.Users.domain.UserRepository', '@UserManagment.Shared.domain.EventBus']
+
+  UserManagment.users.CreatedUserOnUserCreated:
+    class: ../../../../Contexts/UserManagment/Users/application/Create/CreateUserOnUserCreated
+    arguments: ['@UserManagment.users.CreateUser']
+    tags:
+      - { name: 'domainEventSubscriber' }

@@ -1,4 +1,5 @@
 import { AggregateRoot } from '../../../Shared/domain/AgregateRoot';
+import { UserCreatedDomainEvent } from './UserCreatedDomainEvent';
 import { UserFirstName } from './UserFirstName';
 import { UserId } from './UserId';
 import { UserLastName } from './UserLastName';
@@ -19,7 +20,16 @@ export class User extends AggregateRoot {
   }
 
   static create(id: UserId, username: UserUsername, firstName: UserFirstName, lastName: UserLastName): User {
-    return new User(id, username, firstName, lastName);
+    const user = new User(id, username, firstName, lastName);
+    user.record(
+      new UserCreatedDomainEvent({
+        aggregateId: user.id.value,
+        username: user.username.value,
+        firstName: user.firstName.value,
+        lastName: user.lastName.value,
+      }),
+    );
+    return user;
   }
 
   static fromPrimitives(plainData: { id: string; username: string; firstname: string; lastname: string }): User {

@@ -29,14 +29,6 @@ services:
     class: ../../../../Contexts/Shared/infrastructure/QueryBus/InMemoryQueryBus
     arguments: ['@UserManagment.Shared.QueryHandlers']
 
-  # UserManagment.Shared.domain.EventBus:
-  #   factory:
-  #     class: ../../../../../Contexts/UserManagment/Shared/infrastructure/RabbitMQ/RabbitMQEventBusFactory
-  #     method: 'create'
-  #   arguments:
-  #     [
-  #       '@Mooc.Shared.DomainEventFailoverPublisher',
-  #       '@Mooc.Shared.RabbitMQConnection',
-  #       '@Mooc.Shared.RabbitMQqueueFormatter',
-  #       '@Mooc.Shared.RabbitMQConfig'
-  #     ]
+  UserManagment.Shared.domain.EventBus:
+    class: ../../../../Contexts/Shared/infrastructure/EventBus/InMemory/InMemoryAsyncEventBus
+    method: 'create'

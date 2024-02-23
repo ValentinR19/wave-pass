@@ -1,4 +1,3 @@
-import { IPaginated } from '../../../Shared/domain/IPaginated';
 import { User } from './User';
 
 export interface UserRepository {
