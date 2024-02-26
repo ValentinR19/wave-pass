@@ -1,0 +1,14 @@
+services:
+  TicketsManagment.Tickets.domain.TicketRepository:
+    class: ../../../../Contexts/TicketsManagment/Tickets/infrastructure/persistence/MySQLTicketRepository
+    arguments: ['@TicketsManagment.Shared.ConnectionManager']
+
+  TicketsManagment.Tickets.application.TicketCreator:
+    class: ../../../../Contexts/TicketsManagment/Tickets/application/Create/TicketCreator
+    arguments: ['@TicketsManagment.Tickets.domain.TicketRepository', '@TicketsManagment.Shared.domain.EventBus']
+
+  TicketsManagment.Tickets.CreateTicketCommandHandler:
+    class: ../../../../Contexts/TicketsManagment/Tickets/application/Create/CreateTicketCommandHandler
+    arguments: ['@TicketsManagment.Tickets.application.TicketCreator']
+    tags:
+      - { name: 'commandHandler' }

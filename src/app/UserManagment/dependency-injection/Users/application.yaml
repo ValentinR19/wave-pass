@@ -12,13 +12,3 @@ services:
     arguments: ['@UserManagment.Users.application.UserCreator']
     tags:
       - { name: 'commandHandler' }
-
-  UserManagment.users.CreateUser:
-    class: ../../../../Contexts/UserManagment/Users/application/Create/CreatorUserDomainEvent
-    arguments: ['@UserManagment.Users.domain.UserRepository', '@UserManagment.Shared.domain.EventBus']
-
-  UserManagment.users.CreatedUserOnUserCreated:
-    class: ../../../../Contexts/UserManagment/Users/application/Create/CreateUserOnUserCreated
-    arguments: ['@UserManagment.users.CreateUser']
-    tags:
-      - { name: 'domainEventSubscriber' }

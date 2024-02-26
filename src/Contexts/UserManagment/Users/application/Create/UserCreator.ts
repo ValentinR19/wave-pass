@@ -17,8 +17,6 @@ export class UserCreator {
 
     await this.userRepository.save(user);
 
-    //FALTA CONFIGURAR EL EVENTBUS
-
     await this.eventBus.publish(user.pullDomainEvents());
   }
 }

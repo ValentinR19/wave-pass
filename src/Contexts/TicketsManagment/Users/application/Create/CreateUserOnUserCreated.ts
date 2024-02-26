@@ -2,13 +2,13 @@ import { DomainEventClass } from '../../../../Shared/domain/DomainEvent';
 import { DomainEventSubscriber } from '../../../../Shared/domain/DomainEventSuscriber';
 import { UserCreatedDomainEvent } from '../../domain/UserCreatedDomainEvent';
 import { UserId } from '../../domain/UserId';
-import { CreatorUserDomainEvent } from './CreatorUserDomainEvent';
 import { UserUsername } from '../../domain/UserUsername';
 import { UserFirstName } from '../../domain/UserFirstName';
 import { UserLastName } from '../../domain/UserLastName';
+import { UserCreator } from './UserCreator';
 
 export class CreateUserOnUserCreated implements DomainEventSubscriber<UserCreatedDomainEvent> {
-  constructor(private creator: CreatorUserDomainEvent) {
+  constructor(private creator: UserCreator) {
     console.log('Entra aca');
   }
 

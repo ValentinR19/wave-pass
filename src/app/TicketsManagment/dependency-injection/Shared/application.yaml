@@ -1,0 +1,31 @@
+services:
+  TicketsManagment.Shared.PostgreConfig:
+    factory:
+      class: ../../../../Contexts/TicketsManagment/Shared/infrastructure/persistence/postgre/TypeOrmConfigFactory
+      method: 'createConfig'
+
+  TicketsManagment.Shared.ConnectionManager:
+    factory:
+      class: ../../../../Contexts/Shared/infrastructure/persistence/typeorm/TypeOrmClientFactory
+      method: 'createClient'
+    arguments: ['TicketsManagment', '@TicketsManagment.Shared.PostgreConfig']
+
+  TicketsManagment.Shared.CommandHandlers:
+    class: ../../../../Contexts/Shared/infrastructure/CommandBus/CommandHandlers
+    arguments: ['!tagged commandHandler']
+
+  TicketsManagment.Shared.domain.CommandBus:
+    class: ../../../../Contexts/Shared/infrastructure/CommandBus/InMemoryCommandBus
+    arguments: ['@TicketsManagment.Shared.CommandHandlers']
+
+  TicketsManagment.Shared.QueryHandlers:
+    class: ../../../../Contexts/Shared/infrastructure/QueryBus/QueryHandlers
+    arguments: ['!tagged queryHandler']
+
+  TicketsManagment.Shared.domain.QueryBus:
+    class: ../../../../Contexts/Shared/infrastructure/QueryBus/InMemoryQueryBus
+    arguments: ['@TicketsManagment.Shared.QueryHandlers']
+
+  TicketsManagment.Shared.domain.EventBus:
+    class: ../../../../Contexts/Shared/infrastructure/EventBus/InMemory/InMemoryAsyncEventBus
+    method: 'create'

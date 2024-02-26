@@ -1,0 +1,20 @@
+services:
+  TicketsManagment.Users.domain.UserRepository:
+    class: ../../../../Contexts/TicketsManagment/Users/infrastructure/persistence/PostgresUserRepository
+    arguments: ['@TicketsManagment.Shared.ConnectionManager']
+
+  TicketsManagment.Users.application.UserCreator:
+    class: ../../../../Contexts/TicketsManagment/Users/application/Create/UserCreator
+    arguments: ['@TicketsManagment.Users.domain.UserRepository', '@TicketsManagment.Shared.domain.EventBus']
+
+  TicketsManagment.users.CreateUserCommandHandler:
+    class: ../../../../Contexts/TicketsManagment/Users/application/Create/CreateUserCommandHandler
+    arguments: ['@TicketsManagment.Users.application.UserCreator']
+    tags:
+      - { name: 'commandHandler' }
+
+  TicketsManagment.users.CreatedUserOnUserCreated:
+    class: ../../../../Contexts/TicketsManagment/Users/application/Create/CreateUserOnUserCreated
+    arguments: ['@TicketsManagment.Users.application.UserCreator']
+    tags:
+      - { name: 'domainEventSubscriber' }

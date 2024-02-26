@@ -1,0 +1,8 @@
+services:
+  Apps.TicketsManagment.controllers.TicketPutController:
+    class: ../../controllers/TicketPutController
+    arguments: ['@TicketsManagment.Shared.domain.CommandBus']
+
+  # Apps.mooc.controllers.CoursesCounterGetController:
+  #   class: ../../controllers/CoursesCounterGetController
+  #   arguments: ['@Mooc.Shared.domain.QueryBus']
