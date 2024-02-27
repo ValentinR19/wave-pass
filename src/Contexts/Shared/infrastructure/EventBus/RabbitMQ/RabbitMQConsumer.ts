@@ -1,8 +1,8 @@
 import { ConsumeMessage } from 'amqplib';
 import { DomainEvent } from '../../../domain/DomainEvent';
-import { DomainEventSubscriber } from '../../../domain/DomainEventSubscriber';
 import { DomainEventDeserializer } from '../DomainEventDeserializer';
 import { RabbitMqConnection } from './RabbitMqConnection';
+import { DomainEventSubscriber } from '../../../domain/DomainEventSuscriber';
 
 export class RabbitMQConsumer {
   private subscriber: DomainEventSubscriber<DomainEvent>;
@@ -59,7 +59,7 @@ export class RabbitMQConsumer {
 
   private hasBeenRedeliveredTooMuch(message: ConsumeMessage) {
     if (this.hasBeenRedelivered(message)) {
-      const count = parseInt(message.properties.headers['redelivery_count']);
+      const count: Number = parseInt(message.properties.headers['redelivery_count']);
       return count >= this.maxRetries;
     }
     return false;

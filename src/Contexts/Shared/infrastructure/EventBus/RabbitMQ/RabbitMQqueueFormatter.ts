@@ -1,5 +1,5 @@
 import { DomainEvent } from '../../../domain/DomainEvent';
-import { DomainEventSubscriber } from '../../../domain/DomainEventSubscriber';
+import { DomainEventSubscriber } from '../../../domain/DomainEventSuscriber';
 
 export class RabbitMQqueueFormatter {
   constructor(private moduleName: string) {}

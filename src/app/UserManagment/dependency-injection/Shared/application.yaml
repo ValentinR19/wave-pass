@@ -29,6 +29,27 @@ services:
     class: ../../../../Contexts/Shared/infrastructure/QueryBus/InMemoryQueryBus
     arguments: ['@UserManagment.Shared.QueryHandlers']
 
+  #Configuracion de RabbitMQ
+
   UserManagment.Shared.domain.EventBus:
-    class: ../../../../Contexts/Shared/infrastructure/EventBus/InMemory/InMemoryAsyncEventBus
-    method: 'create'
+    factory:
+      class: ../../../../Contexts/UserManagment/Shared/infrastructure/RabbitMQ/RabbitMQEventBusFactory
+      method: 'create'
+    arguments: ['@UserManagment.Shared.RabbitMQConnection', '@UserManagment.Shared.RabbitMQQueueFormatter', '@UserManagment.Shared.RabbitMQConfig']
+
+  UserManagment.Shared.RabbitMQConfig:
+    factory:
+      class: ../../../../Contexts/UserManagment/Shared/infrastructure/RabbitMQ/RabbitMQEventBusFactory
+      method: 'createConfig'
+
+  UserManagment.Shared.RabbitMQQueueFormatter:
+    class: ../../../../Contexts/Shared/infrastructure/EventBus/RabbitMQ/RabbitMQqueueFormatter
+    arguments: ['UserManagment']
+
+  UserManagment.Shared.RabbitMQConnection:
+    class: ../../../../Contexts/Shared/infrastructure/EventBus/RabbitMQ/RabbitMqConnection
+    arguments: ['@UserManagment.Shared.RabbitMQConfig']
+
+  UserManagment.Shared.RabbitMQConfigurer:
+    class: ../../../../Contexts/Shared/infrastructure/EventBus/RabbitMQ/RabbitMQConfigurer
+    arguments: ['@UserManagment.Shared.RabbitMQConnection', '@UserManagment.Shared.RabbitMQQueueFormatter']

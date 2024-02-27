@@ -1,5 +1,5 @@
 import { DomainEvent } from '../../../domain/DomainEvent';
-import { DomainEventSubscriber } from '../../../domain/DomainEventSubscriber';
+import { DomainEventSubscriber } from '../../../domain/DomainEventSuscriber';
 import { DomainEventDeserializer } from '../DomainEventDeserializer';
 import { RabbitMqConnection } from './RabbitMqConnection';
 import { RabbitMQConsumer } from './RabbitMQConsumer';
