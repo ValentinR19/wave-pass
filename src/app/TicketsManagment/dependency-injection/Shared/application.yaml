@@ -26,6 +26,27 @@ services:
     class: ../../../../Contexts/Shared/infrastructure/QueryBus/InMemoryQueryBus
     arguments: ['@TicketsManagment.Shared.QueryHandlers']
 
+  #Configuracion de RabbitMQ
+
   TicketsManagment.Shared.domain.EventBus:
-    class: ../../../../Contexts/Shared/infrastructure/EventBus/InMemory/InMemoryAsyncEventBus
-    method: 'create'
+    factory:
+      class: ../../../../Contexts/TicketsManagment/Shared/infrastructure/RabbitMQ/RabbitMQEventBusFactory
+      method: 'create'
+    arguments: ['@TicketsManagment.Shared.RabbitMQConnection', '@TicketsManagment.Shared.RabbitMQQueueFormatter', '@TicketsManagment.Shared.RabbitMQConfig']
+
+  TicketsManagment.Shared.RabbitMQConfig:
+    factory:
+      class: ../../../../Contexts/TicketsManagment/Shared/infrastructure/RabbitMQ/RabbitMQConfigFactory
+      method: 'createConfig'
+
+  TicketsManagment.Shared.RabbitMQQueueFormatter:
+    class: ../../../../Contexts/Shared/infrastructure/EventBus/RabbitMQ/RabbitMQqueueFormatter
+    arguments: ['TicketsManagment']
+
+  TicketsManagment.Shared.RabbitMQConnection:
+    class: ../../../../Contexts/Shared/infrastructure/EventBus/RabbitMQ/RabbitMqConnection
+    arguments: ['@TicketsManagment.Shared.RabbitMQConfig']
+
+  TicketsManagment.Shared.RabbitMQConfigurer:
+    class: ../../../../Contexts/Shared/infrastructure/EventBus/RabbitMQ/RabbitMQConfigurer
+    arguments: ['@TicketsManagment.Shared.RabbitMQConnection', '@TicketsManagment.Shared.RabbitMQQueueFormatter']

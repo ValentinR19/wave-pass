@@ -44,13 +44,13 @@ const userManagmentConfig = convict({
         doc: 'RabbitMQ username',
         format: String,
         env: 'RABBITMQ_USERNAME',
-        default: 'root',
+        default: 'guest',
       },
       password: {
         doc: 'RabbitMQ password',
         format: String,
         env: 'RABBITMQ_PASSWORD',
-        default: 'root',
+        default: 'guest',
       },
       vhost: {
         doc: 'RabbitMQ virtual host',

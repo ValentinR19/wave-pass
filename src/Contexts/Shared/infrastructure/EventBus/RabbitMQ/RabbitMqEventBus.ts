@@ -1,7 +1,6 @@
 import { DomainEvent } from '../../../domain/DomainEvent';
 import { EventBus } from '../../../domain/EventBus';
 import { DomainEventDeserializer } from '../DomainEventDeserializer';
-import { DomainEventFailoverPublisher } from '../DomainEventFailoverPublisher/DomainEventFailoverPublisher';
 import { DomainEventJsonSerializer } from '../DomainEventJsonSerializer';
 import { DomainEventSubscribers } from '../DomainEventSubscribers';
 import { RabbitMqConnection } from './RabbitMqConnection';
@@ -9,21 +8,13 @@ import { RabbitMQConsumerFactory } from './RabbitMQConsumerFactory';
 import { RabbitMQqueueFormatter } from './RabbitMQqueueFormatter';
 
 export class RabbitMQEventBus implements EventBus {
-  private failoverPublisher: DomainEventFailoverPublisher;
   private connection: RabbitMqConnection;
   private exchange: string;
   private queueNameFormatter: RabbitMQqueueFormatter;
   private maxRetries: Number;
 
-  constructor(params: {
-    failoverPublisher: DomainEventFailoverPublisher;
-    connection: RabbitMqConnection;
-    exchange: string;
-    queueNameFormatter: RabbitMQqueueFormatter;
-    maxRetries: Number;
-  }) {
-    const { failoverPublisher, connection, exchange } = params;
-    this.failoverPublisher = failoverPublisher;
+  constructor(params: { connection: RabbitMqConnection; exchange: string; queueNameFormatter: RabbitMQqueueFormatter; maxRetries: Number }) {
+    const { connection, exchange } = params;
     this.connection = connection;
     this.exchange = exchange;
     this.queueNameFormatter = params.queueNameFormatter;
@@ -50,9 +41,7 @@ export class RabbitMQEventBus implements EventBus {
         const options = this.options(event);
 
         await this.connection.publish({ exchange: this.exchange, routingKey, content, options });
-      } catch (error: any) {
-        await this.failoverPublisher.publish(event);
-      }
+      } catch (error: any) {}
     }
   }
 

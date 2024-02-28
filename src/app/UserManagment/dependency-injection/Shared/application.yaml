@@ -39,7 +39,7 @@ services:
 
   UserManagment.Shared.RabbitMQConfig:
     factory:
-      class: ../../../../Contexts/UserManagment/Shared/infrastructure/RabbitMQ/RabbitMQEventBusFactory
+      class: ../../../../Contexts/UserManagment/Shared/infrastructure/RabbitMQ/RabbitMQConfigFactory
       method: 'createConfig'
 
   UserManagment.Shared.RabbitMQQueueFormatter:

@@ -1,5 +1,5 @@
 import convict from 'convict';
-const userManagmentConfig = convict({
+const ticketManagment = convict({
   env: {
     doc: 'The application environment',
     format: ['production', 'development', 'staging', 'test'],
@@ -44,13 +44,13 @@ const userManagmentConfig = convict({
         doc: 'RabbitMQ username',
         format: String,
         env: 'RABBITMQ_USERNAME',
-        default: 'root',
+        default: 'guest',
       },
       password: {
         doc: 'RabbitMQ password',
         format: String,
         env: 'RABBITMQ_PASSWORD',
-        default: 'root',
+        default: 'guest',
       },
       vhost: {
         doc: 'RabbitMQ virtual host',
@@ -102,6 +102,6 @@ const userManagmentConfig = convict({
   },
 });
 
-userManagmentConfig.loadFile([__dirname + '/default.json', __dirname + '/' + userManagmentConfig.get('env') + '.json']);
+ticketManagment.loadFile([__dirname + '/default.json', __dirname + '/' + ticketManagment.get('env') + '.json']);
 
-export default userManagmentConfig;
+export default ticketManagment;

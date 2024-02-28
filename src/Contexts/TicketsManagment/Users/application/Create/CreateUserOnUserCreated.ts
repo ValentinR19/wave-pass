@@ -8,9 +8,7 @@ import { UserLastName } from '../../domain/UserLastName';
 import { UserCreator } from './UserCreator';
 
 export class CreateUserOnUserCreated implements DomainEventSubscriber<UserCreatedDomainEvent> {
-  constructor(private creator: UserCreator) {
-    console.log('Entra aca');
-  }
+  constructor(private creator: UserCreator) {}
 
   subscribedTo(): DomainEventClass[] {
     return [UserCreatedDomainEvent];
