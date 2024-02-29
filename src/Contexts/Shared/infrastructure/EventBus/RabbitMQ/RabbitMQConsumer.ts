@@ -33,7 +33,6 @@ export class RabbitMQConsumer {
     const domainEvent = this.deserializer.deserialize(content);
 
     try {
-      console.log('mensaje', message);
       await this.subscriber.on(domainEvent);
     } catch (error) {
       await this.handleError(message);

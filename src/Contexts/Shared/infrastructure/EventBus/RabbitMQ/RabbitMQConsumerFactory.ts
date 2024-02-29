@@ -12,9 +12,6 @@ export class RabbitMQConsumerFactory {
   ) {}
 
   build(subscriber: DomainEventSubscriber<DomainEvent>, exchange: string, queueName: string) {
-    console.log('subscriber: ', subscriber);
-    console.log('exchange: ', exchange);
-    console.log('queue name', queueName);
     return new RabbitMQConsumer({
       subscriber,
       deserializer: this.deserializer,

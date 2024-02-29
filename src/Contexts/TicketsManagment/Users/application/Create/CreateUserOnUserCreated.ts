@@ -15,7 +15,6 @@ export class CreateUserOnUserCreated implements DomainEventSubscriber<UserCreate
   }
 
   async on(domainEvent: UserCreatedDomainEvent): Promise<void> {
-    console.log('Evento de dominio capturado: ', domainEvent);
     await this.creator.run({
       id: new UserId(domainEvent.aggregateId),
       username: new UserUsername(domainEvent.username),
