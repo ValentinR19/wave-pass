@@ -6,6 +6,8 @@
   "scripts": {
     "start:dev:user": "NODE_ENV=dev ts-node-dev --ignore-watch node_modules ./src/app/UserManagment/start.ts",
     "start:dev:ticket": "NODE_ENV=dev ts-node-dev --ignore-watch node_modules ./src/app/TicketsManagment/start.ts",
+    "command:user:rabbitmq": "NODE_ENV=dev ts-node src/app/UserManagment/command/runConfigureRabbitMQCommand",
+    "command:ticket:rabbitmq": "NODE_ENV=dev ts-node src/app/TicketsManagment/command/runConfigureRabbitMQCommand",
     "test": "echo \"Error: no test specified\" && exit 1",
     "format": "prettier --write src/ "
   },
