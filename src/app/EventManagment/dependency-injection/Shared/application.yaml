@@ -1,0 +1,52 @@
+services:
+  EventManagment.Shared.PostgreConfig:
+    factory:
+      class: ../../../../Contexts/EventManagment/Shared/infrastructure/persistence/postgre/TypeOrmConfigFactory
+      method: 'createConfig'
+
+  EventManagment.Shared.ConnectionManager:
+    factory:
+      class: ../../../../Contexts/Shared/infrastructure/persistence/typeorm/TypeOrmClientFactory
+      method: 'createClient'
+    arguments: ['EventManagment', '@EventManagment.Shared.PostgreConfig']
+
+  EventManagment.Shared.CommandHandlers:
+    class: ../../../../Contexts/Shared/infrastructure/CommandBus/CommandHandlers
+    arguments: ['!tagged commandHandler']
+
+  EventManagment.Shared.domain.CommandBus:
+    class: ../../../../Contexts/Shared/infrastructure/CommandBus/InMemoryCommandBus
+    arguments: ['@EventManagment.Shared.CommandHandlers']
+
+  EventManagment.Shared.QueryHandlers:
+    class: ../../../../Contexts/Shared/infrastructure/QueryBus/QueryHandlers
+    arguments: ['!tagged queryHandler']
+
+  EventManagment.Shared.domain.QueryBus:
+    class: ../../../../Contexts/Shared/infrastructure/QueryBus/InMemoryQueryBus
+    arguments: ['@EventManagment.Shared.QueryHandlers']
+
+  #Configuracion de RabbitMQ
+
+  EventManagment.Shared.domain.EventBus:
+    factory:
+      class: ../../../../Contexts/EventManagment/Shared/infrastructure/RabbitMQ/RabbitMQEventBusFactory
+      method: 'create'
+    arguments: ['@EventManagment.Shared.RabbitMQConnection', '@EventManagment.Shared.RabbitMQQueueFormatter', '@EventManagment.Shared.RabbitMQConfig']
+
+  EventManagment.Shared.RabbitMQConfig:
+    factory:
+      class: ../../../../Contexts/EventManagment/Shared/infrastructure/RabbitMQ/RabbitMQConfigFactory
+      method: 'createConfig'
+
+  EventManagment.Shared.RabbitMQQueueFormatter:
+    class: ../../../../Contexts/Shared/infrastructure/EventBus/RabbitMQ/RabbitMQqueueFormatter
+    arguments: ['EventManagment']
+
+  EventManagment.Shared.RabbitMQConnection:
+    class: ../../../../Contexts/Shared/infrastructure/EventBus/RabbitMQ/RabbitMqConnection
+    arguments: ['@EventManagment.Shared.RabbitMQConfig']
+
+  EventManagment.Shared.RabbitMQConfigurer:
+    class: ../../../../Contexts/Shared/infrastructure/EventBus/RabbitMQ/RabbitMQConfigurer
+    arguments: ['@EventManagment.Shared.RabbitMQConnection', '@EventManagment.Shared.RabbitMQQueueFormatter']

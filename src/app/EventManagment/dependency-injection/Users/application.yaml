@@ -1,0 +1,20 @@
+services:
+  EventManagment.Users.domain.UserRepository:
+    class: ../../../../Contexts/EventManagment/Users/infrastructure/persistence/PostgresUserRepository
+    arguments: ['@EventManagment.Shared.ConnectionManager']
+
+  EventManagment.Users.application.UserCreator:
+    class: ../../../../Contexts/EventManagment/Users/application/Create/UserCreator
+    arguments: ['@EventManagment.Users.domain.UserRepository', '@EventManagment.Shared.domain.EventBus']
+
+  EventManagment.users.CreateUserCommandHandler:
+    class: ../../../../Contexts/EventManagment/Users/application/Create/CreateUserCommandHandler
+    arguments: ['@EventManagment.Users.application.UserCreator']
+    tags:
+      - { name: 'commandHandler' }
+
+  EventManagment.users.CreatedUserOnUserCreated:
+    class: ../../../../Contexts/EventManagment/Users/application/Create/CreateUserOnUserCreated
+    arguments: ['@EventManagment.Users.application.UserCreator']
+    tags:
+      - { name: 'domainEventSubscriber' }

@@ -1,0 +1,14 @@
+services:
+  EventManagment.Events.domain.EventRepository:
+    class: ../../../../Contexts/EventManagment/Events/infrastructure/persistence/MySQLEventRepository
+    arguments: ['@EventManagment.Shared.ConnectionManager']
+
+  EventManagment.Events.application.EventCreator:
+    class: ../../../../Contexts/EventManagment/Events/application/Create/EventCreator
+    arguments: ['@EventManagment.Events.domain.EventRepository', '@EventManagment.Shared.domain.EventBus']
+
+  EventManagment.Events.CreateEventCommandHandler:
+    class: ../../../../Contexts/EventManagment/Events/application/Create/CreateEventCommandHandler
+    arguments: ['@EventManagment.Events.application.EventCreator']
+    tags:
+      - { name: 'commandHandler' }
