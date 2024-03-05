@@ -35,7 +35,7 @@ const ticketManagment = convict({
       doc: 'The database name',
       format: String,
       env: 'TYPEORM_DATABASE',
-      default: 'tickets-managent-dev',
+      default: 'event-managment-dev',
     },
   },
   rabbitmq: {

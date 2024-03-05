@@ -7,9 +7,9 @@ import container from '../dependency-injection';
 
 export class ConfigureRabbitMQCommand {
   static async run() {
-    const connection = container.get<RabbitMqConnection>('TicketsManagment.Shared.RabbitMQConnection');
-    const nameFormatter = container.get<RabbitMQqueueFormatter>('TicketsManagment.Shared.RabbitMQQueueFormatter');
-    const { exchangeSettings, retryTtl } = container.get<RabbitMQConfig>('TicketsManagment.Shared.RabbitMQConfig');
+    const connection = container.get<RabbitMqConnection>('EventManagment.Shared.RabbitMQConnection');
+    const nameFormatter = container.get<RabbitMQqueueFormatter>('EventManagment.Shared.RabbitMQQueueFormatter');
+    const { exchangeSettings, retryTtl } = container.get<RabbitMQConfig>('EventManagment.Shared.RabbitMQConfig');
 
     await connection.connect();
 
