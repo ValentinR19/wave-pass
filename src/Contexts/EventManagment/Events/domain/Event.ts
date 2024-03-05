@@ -1,5 +1,5 @@
 import { AggregateRoot } from '../../../Shared/domain/AgregateRoot';
-import { UserId } from '../../Users/domain/UserId';
+import { UserId } from '../../Shared/domain/UserId';
 import { EventCreatedDomainEvent } from './EventCreatedDomainEvent';
 import { EventDate } from './EventDate';
 import { EventDescription } from './EventDescription';

@@ -1,7 +1,7 @@
 import { User } from '../../domain/User';
 import { UserRepository } from '../../domain/UserRepository';
 import { UserFirstName } from '../../domain/UserFirstName';
-import { UserId } from '../../domain/UserId';
+import { UserId } from '../../../Shared/domain/UserId';
 import { UserLastName } from '../../domain/UserLastName';
 import { UserUsername } from '../../domain/UserUsername';
 

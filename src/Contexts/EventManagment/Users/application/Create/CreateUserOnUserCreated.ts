@@ -1,7 +1,7 @@
 import { DomainEventClass } from '../../../../Shared/domain/DomainEvent';
 import { DomainEventSubscriber } from '../../../../Shared/domain/DomainEventSuscriber';
 import { UserCreatedDomainEvent } from '../../domain/UserCreatedDomainEvent';
-import { UserId } from '../../domain/UserId';
+import { UserId } from '../../../Shared/domain/UserId';
 import { UserUsername } from '../../domain/UserUsername';
 import { UserFirstName } from '../../domain/UserFirstName';
 import { UserLastName } from '../../domain/UserLastName';

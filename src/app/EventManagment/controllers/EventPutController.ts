@@ -8,6 +8,13 @@ type EventPutRequest = Request & {
   body: {
     id: string;
     title: string;
+    eventDate: string;
+    description: string;
+    totalTickets: number;
+    dateStartBuy: string;
+    dateEndBuy: string;
+    idLocation: string;
+    idUser: string;
   };
 };
 export class EventPutController implements Controller {
@@ -15,8 +22,8 @@ export class EventPutController implements Controller {
 
   async run(req: EventPutRequest, res: Response) {
     try {
-      const { id, title } = req.body;
-      const createEventCommand = new CreateEventCommand({ id, title });
+      const { id, title, eventDate, description, totalTickets, dateStartBuy, dateEndBuy, idLocation, idUser } = req.body;
+      const createEventCommand = new CreateEventCommand({ id, title, eventDate, description, totalTickets, dateStartBuy, dateEndBuy, idLocation, idUser });
       await this.commandBus.dispatch(createEventCommand);
       res.status(httpStatus.CREATED).send();
     } catch (error) {

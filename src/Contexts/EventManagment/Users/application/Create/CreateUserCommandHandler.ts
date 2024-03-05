@@ -1,7 +1,7 @@
 import { Command } from '../../../../Shared/domain/Command';
 import { CommandHandler } from '../../../../Shared/domain/CommandHandler';
 import { UserFirstName } from '../../domain/UserFirstName';
-import { UserId } from '../../domain/UserId';
+import { UserId } from '../../../Shared/domain/UserId';
 import { UserLastName } from '../../domain/UserLastName';
 import { UserUsername } from '../../domain/UserUsername';
 import { CreateUserCommand } from '../CreateUserCommand';

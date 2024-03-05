@@ -1,7 +1,7 @@
 import { AggregateRoot } from '../../../Shared/domain/AgregateRoot';
 import { UserCreatedDomainEvent } from './UserCreatedDomainEvent';
 import { UserFirstName } from './UserFirstName';
-import { UserId } from './UserId';
+import { UserId } from '../../Shared/domain/UserId';
 import { UserLastName } from './UserLastName';
 import { UserUsername } from './UserUsername';
 
