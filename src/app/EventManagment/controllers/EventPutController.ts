@@ -4,6 +4,14 @@ import { Controller } from './Controller';
 import { Request, Response } from 'express';
 import { CreateEventCommand } from '../../../Contexts/EventManagment/Events/application/CreateEventCommand';
 
+type LotDTO = {
+  id: string;
+  name: string;
+  totalTicket: string;
+  prive: string;
+  idEvent: string;
+};
+
 type EventPutRequest = Request & {
   body: {
     id: string;
@@ -15,6 +23,7 @@ type EventPutRequest = Request & {
     dateEndBuy: string;
     idLocation: string;
     idUser: string;
+    lots: LotDTO[];
   };
 };
 export class EventPutController implements Controller {
@@ -22,8 +31,8 @@ export class EventPutController implements Controller {
 
   async run(req: EventPutRequest, res: Response) {
     try {
-      const { id, title, eventDate, description, totalTickets, dateStartBuy, dateEndBuy, idLocation, idUser } = req.body;
-      const createEventCommand = new CreateEventCommand({ id, title, eventDate, description, totalTickets, dateStartBuy, dateEndBuy, idLocation, idUser });
+      const { id, title, eventDate, description, totalTickets, dateStartBuy, dateEndBuy, idLocation, idUser, lots } = req.body;
+      const createEventCommand = new CreateEventCommand({ id, title, eventDate, description, totalTickets, dateStartBuy, dateEndBuy, idLocation, idUser, lots });
       await this.commandBus.dispatch(createEventCommand);
       res.status(httpStatus.CREATED).send();
     } catch (error) {
