@@ -17,6 +17,8 @@ export class Lot extends AggregateRoot {
 
   idEvent: EventId;
 
+  event: Event;
+
   constructor(id: LotId, name: LotName, totalTicket: LotTotalTicket, price: LotPrice, idEvent: EventId) {
     super();
     this.id = id;

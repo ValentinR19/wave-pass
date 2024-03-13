@@ -14,11 +14,13 @@ export const LotEntity = new EntitySchema<Lot>({
 
   columns: {
     id: {
+      name: 'id',
       type: String,
       primary: true,
       transformer: ValueObjectTransformer(LotId),
     },
     name: {
+      name: 'name',
       type: String,
       transformer: ValueObjectTransformer(LotName),
     },
@@ -28,6 +30,7 @@ export const LotEntity = new EntitySchema<Lot>({
       transformer: ValueObjectTransformer(LotTotalTicket),
     },
     price: {
+      name: 'price',
       type: Number,
       transformer: ValueObjectTransformer(LotPrice),
     },
@@ -35,6 +38,13 @@ export const LotEntity = new EntitySchema<Lot>({
       name: 'id_event',
       type: Number,
       transformer: ValueObjectTransformer(EventId),
+    },
+  },
+  relations: {
+    event: {
+      target: Event,
+      type: 'many-to-one',
+      cascade: ['remove', 'soft-remove'],
     },
   },
 });

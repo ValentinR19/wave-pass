@@ -1,5 +1,4 @@
 import { Command } from '../../../Shared/domain/Command';
-import { CreateLotCommand } from '../../Lots/application/CreateLotCommand';
 
 type Params = {
   id: string;
@@ -11,7 +10,6 @@ type Params = {
   dateEndBuy: string;
   idLocation: string;
   idUser: string;
-  lots: CreateLotCommand[];
 };
 
 export class CreateEventCommand extends Command {
@@ -24,9 +22,8 @@ export class CreateEventCommand extends Command {
   dateEndBuy: string;
   idLocation: string;
   idUser: string;
-  lots: CreateLotCommand[];
 
-  constructor({ id, title, eventDate, description, totalTickets, dateStartBuy, dateEndBuy, idLocation, idUser, lots }: Params) {
+  constructor({ id, title, eventDate, description, totalTickets, dateStartBuy, dateEndBuy, idLocation, idUser }: Params) {
     super();
     this.id = id;
     this.title = title;
@@ -37,6 +34,5 @@ export class CreateEventCommand extends Command {
     this.dateEndBuy = dateEndBuy;
     this.idLocation = idLocation;
     this.idUser = idUser;
-    this.lots = lots;
   }
 }
