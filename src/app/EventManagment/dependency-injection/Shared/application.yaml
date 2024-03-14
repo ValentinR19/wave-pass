@@ -1,4 +1,8 @@
 services:
+  Shared.Logger:
+    class: ../../../../Contexts/Shared/infrastructure/WinstonLogger
+    arguments: []
+
   EventManagment.Shared.PostgreConfig:
     factory:
       class: ../../../../Contexts/EventManagment/Shared/infrastructure/persistence/postgre/TypeOrmConfigFactory

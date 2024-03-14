@@ -15,16 +15,18 @@ export const EventEntity = new EntitySchema<Event>({
 
   columns: {
     id: {
+      name: 'id',
       type: String,
       primary: true,
       transformer: ValueObjectTransformer(EventId),
     },
     title: {
+      name: 'title',
       type: String,
       transformer: ValueObjectTransformer(EventTitle),
     },
     eventDate: {
-      name: 'event_day',
+      name: 'event_date',
       type: 'timestamp',
       transformer: ValueObjectTransformer(EventDate),
     },

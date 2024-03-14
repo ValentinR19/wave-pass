@@ -2,6 +2,10 @@ services:
   # UserManagment.Shared.DomainEventFailoverPublisher:
   #   class: ../../../../Contexts/Shared/infrastructure/EventBus/DomainEventFailoverPublisher/DomainEventFailoverPublisher
   #   arguments: ['@UserManagment.Shared.ConnectionManager']
+  Shared.Logger:
+    class: ../../../../Contexts/Shared/infrastructure/WinstonLogger
+    arguments: []
+
   UserManagment.Shared.PostgreConfig:
     factory:
       class: ../../../../Contexts/UserManagment/Shared/infrastructure/persistence/postgre/TypeOrmConfigFactory

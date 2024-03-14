@@ -7,14 +7,18 @@ import bodyParser from 'body-parser';
 import compress from 'compression';
 import errorHandler from 'errorhandler';
 import { registerRoutes } from './routes';
+import Logger from '../../Contexts/Shared/domain/Logger';
+import container from './dependency-injection';
 
 export class Server {
   private express: express.Express;
   private port: string;
   private httpServer?: http.Server;
+  private logger: Logger;
 
   constructor(port: string) {
     this.port = port;
+    this.logger = container.get('Shared.Logger');
     this.express = express();
     this.express.use(bodyParser.json());
     this.express.use(bodyParser.urlencoded({ extended: true }));
@@ -38,8 +42,8 @@ export class Server {
   async listen(): Promise<void> {
     return new Promise((resolve) => {
       this.httpServer = this.express.listen(this.port, () => {
-        console.log(`  Mock Backend App is running at http://localhost:${this.port} in ${this.express.get('env')} mode`);
-        console.log('  Press CTRL-C to stop\n');
+        this.logger.info(`  Backoffice Backend App is running at http://localhost:${this.port} in ${this.express.get('env')} mode`);
+        this.logger.info('  Press CTRL-C to stop\n');
         resolve();
       });
     });

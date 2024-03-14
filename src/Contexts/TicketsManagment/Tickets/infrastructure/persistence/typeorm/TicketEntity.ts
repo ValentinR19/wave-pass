@@ -8,14 +8,15 @@ export const TicketEntity = new EntitySchema<Ticket>({
   name: 'Ticket',
   tableName: 'tickets',
   target: Ticket,
-
   columns: {
     id: {
+      name: 'id',
       type: String,
       primary: true,
       transformer: ValueObjectTransformer(TicketId),
     },
     name: {
+      name: 'name',
       type: String,
       transformer: ValueObjectTransformer(TicketName),
     },

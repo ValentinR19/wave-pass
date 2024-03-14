@@ -14,7 +14,6 @@ export class UserCreator {
 
   async run(params: { id: UserId; username: UserUsername; firstName: UserFirstName; lastName: UserLastName }): Promise<void> {
     const user = User.create(params.id, params.username, params.firstName, params.lastName);
-
     await this.userRepository.save(user);
 
     await this.eventBus.publish(user.pullDomainEvents());

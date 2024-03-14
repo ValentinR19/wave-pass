@@ -22,7 +22,6 @@ type EventPutRequest = Request & {
     totalTickets: number;
     dateStartBuy: string;
     dateEndBuy: string;
-    idLocation: string;
     idUser: string;
     lots: LotDTO[];
   };
@@ -42,6 +41,7 @@ export class EventPutController implements Controller {
       await Promise.all(createLotCommands.map((lotCommand) => this.commandBus.dispatch(lotCommand)));
       res.status(httpStatus.CREATED).send();
     } catch (error) {
+      console.log('ERROR: ', error);
       res.status(httpStatus.INTERNAL_SERVER_ERROR).send();
     }
   }

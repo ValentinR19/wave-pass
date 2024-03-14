@@ -13,11 +13,13 @@ export const UserEntity = new EntitySchema<User>({
 
   columns: {
     id: {
+      name: 'id',
       type: String,
       primary: true,
       transformer: ValueObjectTransformer(UserId),
     },
     username: {
+      name: 'username',
       type: String,
       transformer: ValueObjectTransformer(UserUsername),
     },

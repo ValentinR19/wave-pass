@@ -22,6 +22,7 @@ export class UserPutController implements Controller {
       await this.commandBus.dispatch(createCourseCommand);
       res.status(httpStatus.CREATED).send();
     } catch (error) {
+      console.log('ERROR: ', error);
       res.status(httpStatus.INTERNAL_SERVER_ERROR).send();
     }
   }
