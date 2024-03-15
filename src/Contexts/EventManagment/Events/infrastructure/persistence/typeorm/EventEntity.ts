@@ -78,7 +78,7 @@ export const EventEntity = new EntitySchema<Event>({
       type: 'many-to-one',
       cascade: ['remove', 'soft-remove'],
       joinColumn: { name: 'id_event', referencedColumnName: 'id' },
-      inverseSide: 'users',
+      inverseSide: 'events',
     },
   },
 });
