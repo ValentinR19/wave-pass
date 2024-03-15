@@ -1,14 +1,14 @@
 services:
-  EventManagment.Lots.domain.EventRepository:
+  EventManagment.Lots.domain.LotRepository:
     class: ../../../../Contexts/EventManagment/Lots/infrastructure/persistence/MySQLLotRepository
     arguments: ['@EventManagment.Shared.ConnectionManager']
 
   EventManagment.Lots.application.LotCreator:
     class: ../../../../Contexts/EventManagment/Lots/application/Create/LotCreator
-    arguments: ['@EventManagment.Events.domain.EventRepository', '@EventManagment.Shared.domain.EventBus']
+    arguments: ['@EventManagment.Lots.domain.LotRepository', '@EventManagment.Shared.domain.EventBus']
 
-  EventManagment.Lots.CreateEventCommandHandler:
-    class: ../../../../Contexts/EventManagment/Lots/application/Create/CreateEventCommandHandler
+  EventManagment.Lots.CreateLotCommandHandler:
+    class: ../../../../Contexts/EventManagment/Lots/application/Create/CreateLotCommandHandler
     arguments: ['@EventManagment.Lots.application.LotCreator']
     tags:
       - { name: 'commandHandler' }

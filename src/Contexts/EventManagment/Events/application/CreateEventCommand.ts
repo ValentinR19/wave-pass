@@ -8,7 +8,6 @@ type Params = {
   totalTickets: number;
   dateStartBuy: string;
   dateEndBuy: string;
-  idLocation: string;
   idUser: string;
 };
 
@@ -20,10 +19,9 @@ export class CreateEventCommand extends Command {
   totalTickets: number;
   dateStartBuy: string;
   dateEndBuy: string;
-  idLocation: string;
   idUser: string;
 
-  constructor({ id, title, eventDate, description, totalTickets, dateStartBuy, dateEndBuy, idLocation, idUser }: Params) {
+  constructor({ id, title, eventDate, description, totalTickets, dateStartBuy, dateEndBuy, idUser }: Params) {
     super();
     this.id = id;
     this.title = title;
@@ -32,7 +30,6 @@ export class CreateEventCommand extends Command {
     this.totalTickets = totalTickets;
     this.dateStartBuy = dateStartBuy;
     this.dateEndBuy = dateEndBuy;
-    this.idLocation = idLocation;
     this.idUser = idUser;
   }
 }

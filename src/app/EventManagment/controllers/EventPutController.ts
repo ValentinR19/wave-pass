@@ -31,8 +31,8 @@ export class EventPutController implements Controller {
 
   async run(req: EventPutRequest, res: Response) {
     try {
-      const { id, title, eventDate, description, totalTickets, dateStartBuy, dateEndBuy, idLocation, idUser, lots } = req.body;
-      const createEventCommand = new CreateEventCommand({ id, title, eventDate, description, totalTickets, dateStartBuy, dateEndBuy, idLocation, idUser });
+      const { id, title, eventDate, description, totalTickets, dateStartBuy, dateEndBuy, idUser, lots } = req.body;
+      const createEventCommand = new CreateEventCommand({ id, title, eventDate, description, totalTickets, dateStartBuy, dateEndBuy, idUser });
       await this.commandBus.dispatch(createEventCommand);
 
       const createLotCommands: CreateLotCommand[] = lots.map(

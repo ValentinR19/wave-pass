@@ -1,4 +1,5 @@
 import { AggregateRoot } from '../../../Shared/domain/AgregateRoot';
+import { Event } from '../../Events/domain/Event';
 import { EventId } from '../../Events/domain/EventId';
 import { LotCreatedDomainEvent } from './LotCreatedDomainEvent';
 import { LotId } from './LotId';

@@ -24,8 +24,7 @@ export class CreateEventCommandHandler implements CommandHandler<CreateEventComm
     const totalTickets = new EventTotalTicket(command.totalTickets);
     const dateStartBuy = new EventDate(command.eventDate);
     const dateEndBuy = new EventDate(command.dateEndBuy);
-    const idLocation = command.idLocation;
     const idUser = new UserId(command.idUser);
-    await this.eventCreator.run({ id, title, eventDate, description, totalTickets, dateStartBuy, dateEndBuy, idLocation, idUser });
+    await this.eventCreator.run({ id, title, eventDate, description, totalTickets, idUser, dateStartBuy, dateEndBuy });
   }
 }

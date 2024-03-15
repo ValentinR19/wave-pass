@@ -13,9 +13,9 @@ export class Uuid extends ValueObject<string> {
     return new Uuid(uuid());
   }
 
-  private ensureIsValidUuid(id: string): void {
-    if (!validate(id)) {
-      throw new InvalidArgumentError(`<${this.constructor.name}> does not allow the value <${id}>`);
+  private ensureIsValidUuid(value: any): void {
+    if (!validate(value) && !validate(value?.value)) {
+      throw new InvalidArgumentError(`<${this.constructor.name}> does not allow the value <${value}>`);
     }
   }
 }

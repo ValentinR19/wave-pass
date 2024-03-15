@@ -20,12 +20,11 @@ export class EventCreator {
     eventDate: EventDate;
     description: EventDescription;
     totalTickets: EventTotalTicket;
+    idUser: UserId;
     dateStartBuy: EventDate;
     dateEndBuy: EventDate;
-    idLocation: string;
-    idUser: UserId;
   }): Promise<void> {
-    const event = Event.create(params.id, params.title, params.eventDate, params.description, params.totalTickets, params.dateStartBuy, params.dateEndBuy);
+    const event = Event.create(params.id, params.title, params.eventDate, params.description, params.totalTickets, params.idUser, params.dateStartBuy, params.dateEndBuy);
 
     await this.eventRepository.save(event);
 

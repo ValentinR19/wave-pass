@@ -6,5 +6,5 @@ import { validateReqSchema } from '.';
 export const register = (router: Router) => {
   const eventPutController = container.get('Apps.EventManagment.controllers.EventPutController');
   const reqSchema = [body('id').exists().isString(), body('title').exists().isString()];
-  router.put('/event/:id', reqSchema, validateReqSchema, (req: Request, res: Response) => eventPutController.run(req, res));
+  router.put('/events/:id', reqSchema, validateReqSchema, (req: Request, res: Response) => eventPutController.run(req, res));
 };

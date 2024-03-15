@@ -23,27 +23,33 @@ export class Event extends AggregateRoot {
 
   dateEndBuy: EventDate;
 
-  createdAt: EventDate;
+  createdAt: Date;
 
-  updatedAt: EventDate | null;
+  updatedAt: Date | null;
 
-  deletedAt: EventDate | null;
-
-  idLocation: number;
+  deletedAt: Date | null;
 
   idUser: UserId;
 
-  images: string[];
-
   user: User;
 
-  constructor(id: EventId, title: EventTitle, eventDate: EventDate, description: EventDescription, totalTickets: EventTotalTicket, dateStartBuy: EventDate, dateEndBuy: EventDate) {
+  constructor(
+    id: EventId,
+    title: EventTitle,
+    eventDate: EventDate,
+    description: EventDescription,
+    totalTickets: EventTotalTicket,
+    idUser: UserId,
+    dateStartBuy: EventDate,
+    dateEndBuy: EventDate,
+  ) {
     super();
     this.id = id;
     this.title = title;
     this.eventDate = eventDate;
     this.description = description;
     this.totalTickets = totalTickets;
+    this.idUser = idUser;
     this.dateStartBuy = dateStartBuy;
     this.dateEndBuy = dateEndBuy;
   }
@@ -54,10 +60,11 @@ export class Event extends AggregateRoot {
     eventDate: EventDate,
     description: EventDescription,
     totalTickets: EventTotalTicket,
+    idUser: UserId,
     dateStartBuy: EventDate,
     dateEndBuy: EventDate,
   ): Event {
-    const event = new Event(id, title, eventDate, description, totalTickets, dateStartBuy, dateEndBuy);
+    const event = new Event(id, title, eventDate, description, totalTickets, idUser, dateStartBuy, dateEndBuy);
     event.record(
       new EventCreatedDomainEvent({
         aggregateId: event.id.value,
@@ -74,13 +81,23 @@ export class Event extends AggregateRoot {
     return event;
   }
 
-  static fromPrimitives(plainData: { id: string; title: string; eventDate: string; description: string; totalTickets: number; dateStartBuy: string; dateEndBuy: string }): Event {
+  static fromPrimitives(plainData: {
+    id: string;
+    title: string;
+    eventDate: string;
+    description: string;
+    totalTickets: number;
+    idUser: string;
+    dateStartBuy: string;
+    dateEndBuy: string;
+  }): Event {
     return new Event(
       new EventId(plainData.id),
       new EventTitle(plainData.title),
       new EventDate(plainData.eventDate),
       new EventDescription(plainData.description),
       new EventTotalTicket(plainData.totalTickets),
+      new UserId(plainData.idUser),
       new EventDate(plainData.dateStartBuy),
       new EventDate(plainData.dateEndBuy),
     );

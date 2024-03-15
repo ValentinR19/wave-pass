@@ -20,6 +20,12 @@ export const EventEntity = new EntitySchema<Event>({
       primary: true,
       transformer: ValueObjectTransformer(EventId),
     },
+    description: {
+      name: 'description',
+      type: String,
+      transformer: ValueObjectTransformer(EventTitle),
+    },
+
     title: {
       name: 'title',
       type: String,
@@ -49,21 +55,19 @@ export const EventEntity = new EntitySchema<Event>({
       name: 'created_at',
       type: 'timestamp',
       default: 'CURRENT_TIMESTAMP',
-      transformer: ValueObjectTransformer(EventDate),
       createDate: true,
     },
     updatedAt: {
       name: 'updated_at',
       type: 'timestamp',
       default: null,
-      transformer: ValueObjectTransformer(EventDate),
+
       updateDate: true,
     },
     deletedAt: {
       name: 'deleted_at',
       type: 'timestamp',
       default: null,
-      transformer: ValueObjectTransformer(EventDate),
       deleteDate: true,
     },
     idUser: {
@@ -77,7 +81,7 @@ export const EventEntity = new EntitySchema<Event>({
       target: UserEntity,
       type: 'many-to-one',
       cascade: ['remove', 'soft-remove'],
-      joinColumn: { name: 'id_event', referencedColumnName: 'id' },
+      joinColumn: { name: 'id_user', referencedColumnName: 'id' },
       inverseSide: 'events',
     },
   },

@@ -2,4 +2,5 @@ imports:
   - { resource: ./Shared/application.yaml }
   - { resource: ./apps/application.yaml }
   - { resource: ./Events/application.yaml }
+  - { resource: ./Lots/application.yaml }
   - { resource: ./Users/application.yaml }
