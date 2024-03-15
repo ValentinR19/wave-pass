@@ -6,7 +6,7 @@ import { EventTitle } from '../../../domain/EventTitle';
 import { EventDate } from '../../../domain/EventDate';
 import { EventTotalTicket } from '../../../domain/EventTotalTicket';
 import { UserId } from '../../../../Shared/domain/UserId';
-import { LotEntity } from '../../../../Lots/infrastructure/persistence/typeorm/LotEntity';
+import { UserEntity } from '../../../../Users/infrastructure/persistence/typeorm/UserEntity';
 
 export const EventEntity = new EntitySchema<Event>({
   name: 'Event',
@@ -73,10 +73,12 @@ export const EventEntity = new EntitySchema<Event>({
     },
   },
   relations: {
-    lots: {
-      target: LotEntity,
-      type: 'one-to-many',
-      cascade: true,
+    user: {
+      target: UserEntity,
+      type: 'many-to-one',
+      cascade: ['remove', 'soft-remove'],
+      joinColumn: { name: 'id_event', referencedColumnName: 'id' },
+      inverseSide: 'users',
     },
   },
 });

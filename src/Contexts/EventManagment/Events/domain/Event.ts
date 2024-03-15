@@ -1,6 +1,6 @@
 import { AggregateRoot } from '../../../Shared/domain/AgregateRoot';
-import { Lot } from '../../Lots/domain/Lot';
 import { UserId } from '../../Shared/domain/UserId';
+import { User } from '../../Users/domain/User';
 import { EventCreatedDomainEvent } from './EventCreatedDomainEvent';
 import { EventDate } from './EventDate';
 import { EventDescription } from './EventDescription';
@@ -35,7 +35,7 @@ export class Event extends AggregateRoot {
 
   images: string[];
 
-  lots: Lot[];
+  user: User;
 
   constructor(id: EventId, title: EventTitle, eventDate: EventDate, description: EventDescription, totalTickets: EventTotalTicket, dateStartBuy: EventDate, dateEndBuy: EventDate) {
     super();
